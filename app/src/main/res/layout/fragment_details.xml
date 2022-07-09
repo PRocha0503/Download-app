@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="20dp">
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+            <androidx.constraintlayout.motion.widget.MotionLayout
+                android:id="@+id/motion_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutDescription="@xml/motion_layout"
+                >
+
+                <TextView
+                    android:id="@+id/text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp"
+                    tools:layout_editor_absoluteX="16dp" />
+
+                <ImageView
+                    android:id="@+id/image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_download"
+                    />
+
+                <TextView
+                    android:id="@+id/statusTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/status"
+                    android:textSize="40sp"
+                    tools:layout_editor_absoluteX="149dp"
+                    tools:layout_editor_absoluteY="316dp" />
+
+                <TextView
+                    android:id="@+id/statusTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/status_placeholder"
+
+                    android:textSize="30sp"
+                    tools:layout_editor_absoluteX="157dp"
+                    tools:layout_editor_absoluteY="416dp" />
+
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/go_back"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+
+            </androidx.constraintlayout.motion.widget.MotionLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</layout>
