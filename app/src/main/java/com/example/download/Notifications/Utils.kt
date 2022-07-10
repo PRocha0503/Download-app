@@ -63,7 +63,7 @@ fun NotificationManager.sendNotification(file: String,status: String, applicatio
         // Set content intent, what happens when user clicks notification
         .setContentIntent(contentPendingIntent)
         .setAutoCancel(true)
-//        .addAction(R.drawable.egg_icon,applicationContext.getString(R.string.snooze),snoozePendingIntent)
+        .addAction(R.drawable.ic_download,applicationContext.getString(R.string.notification_button),contentPendingIntent)
         // Set priority for older devices
         .setPriority(NotificationCompat.PRIORITY_HIGH)
 

@@ -41,8 +41,6 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        activity!!.registerReceiver(receiver, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
-
         //Create a notification channel
         createChannel(getString(R.string.download_channel_id), getString(R.string.download_channel_name))
 
@@ -96,6 +94,16 @@ class MainFragment : Fragment() {
         }
         return binding.root
     }
+    override fun onStart() {
+        activity!!.registerReceiver(receiver, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
+        super.onStart()
+    }
+
+    override fun onStop() {
+        activity!!.unregisterReceiver(receiver)
+        super.onStop()
+    }
+
     private val receiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             val id = intent?.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)

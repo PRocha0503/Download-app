@@ -11,7 +11,9 @@ import android.graphics.RectF
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getColor
+import androidx.core.content.withStyledAttributes
 import com.example.download.R
 import kotlin.properties.Delegates
 
@@ -24,6 +26,8 @@ class LoadingButton @JvmOverloads constructor(context: Context,
     private var progress = 0.0f
     private val circleDiameter = 60f
     private var downloadLabel = context.resources.getString(R.string.download)
+    private var mainColor = 0
+    private var textColor = 0
 
     //Keep tack of button status
     private var buttonState: ButtonState by Delegates.observable<ButtonState>(ButtonState.Completed) { p, old, new ->
@@ -50,7 +54,17 @@ class LoadingButton @JvmOverloads constructor(context: Context,
 
     init{
         isClickable = true
-
+//        context.withStyledAttributes(attrs, R.styleable.LoadingButton){
+//            mainColor = getColor(
+//                R.styleable.LoadingButton_mainColor,
+//                0
+//            )
+//        }
+        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.LoadingButton).apply {
+            mainColor= getColor(R.styleable.LoadingButton_mainColor, 0)
+            textColor = getColor(R.styleable.LoadingButton_textColor,0)
+        }
+        typedArray.recycle()
     }
    //Rectangle
     private val rect by lazy { RectF(0f, 0f, width, height) }
@@ -67,13 +81,13 @@ class LoadingButton @JvmOverloads constructor(context: Context,
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         canvas?.apply {
-            buttonPaint.color = getColor(context,R.color.red)
+            buttonPaint.color = mainColor
             drawRect(rect, buttonPaint)
             if (buttonState == ButtonState.Loading) {
                 drawRectLoading(canvas)
                 drawArcLoading(canvas)
             }
-            buttonPaint.color = getColor(context,R.color.white)
+            buttonPaint.color = textColor
             drawText(downloadLabel, width.toFloat() / 2, height.toFloat() / 2 + 0, buttonPaint)
 
         }

@@ -1,6 +1,7 @@
 package com.example.download.details
 
 import android.app.DownloadManager
+import android.app.NotificationManager
 import android.content.Intent.getIntent
 import android.graphics.Color
 import android.os.Bundle
@@ -11,12 +12,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
+import com.example.download.Notifications.cancelNotifications
 import com.example.download.R
 import com.example.download.databinding.FragmentDetailsBinding
 import com.example.download.main.MainFragmentDirections
 
 
 class DetailsFragment : Fragment() {
+    private lateinit var notificationManager: NotificationManager
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -24,8 +28,9 @@ class DetailsFragment : Fragment() {
         val file = DetailsFragmentArgs.fromBundle(arguments!!).file
         val status = DetailsFragmentArgs.fromBundle(arguments!!).status
 
-
-        Log.i("DEUBG","HERE")
+        //Init notification Manager
+        notificationManager = activity!!.getSystemService(NotificationManager::class.java) as NotificationManager
+        notificationManager.cancelAll()
         //Binding
         val binding: FragmentDetailsBinding = DataBindingUtil.inflate(inflater,
             R.layout.fragment_details,container,false)
@@ -45,4 +50,6 @@ class DetailsFragment : Fragment() {
 
         return binding.root
     }
+
+
 }

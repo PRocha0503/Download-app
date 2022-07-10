@@ -57,7 +57,10 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:text="Download"/>
+            tools:text="Download"
+            app:mainColor="@color/red"
+            app:textColor="@color/white"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
